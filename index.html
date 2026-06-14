@@ -67,13 +67,26 @@
             text-align: center;
             margin: 50px 0;
         }
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        @media (min-width: 600px) {
+            .btn-group {
+                flex-direction: row;
+            }
+        }
         .btn-download {
             display: inline-block;
             background: linear-gradient(135deg, #23c45e, #16a34a);
             color: white;
             text-decoration: none;
-            padding: 18px 40px;
-            font-size: 1.3em;
+            padding: 16px 35px;
+            font-size: 1.2em;
             font-weight: bold;
             border-radius: 50px;
             box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
@@ -82,6 +95,13 @@
         .btn-download:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 24px rgba(22, 163, 74, 0.3);
+        }
+        .btn-sf {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            box-shadow: 0 10px 20px rgba(211, 84, 0, 0.2);
+        }
+        .btn-sf:hover {
+            box-shadow: 0 12px 24px rgba(211, 84, 0, 0.3);
         }
         .live-alert {
             background-color: #fff9db;
@@ -93,6 +113,17 @@
             margin: 25px auto 0 auto;
             text-align: left;
             font-size: 1em;
+        }
+        .checksum-box {
+            background-color: #f1f2f6;
+            border: 1px dashed #ced6e0;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9em;
+            word-break: break-all;
+            margin-top: 10px;
+            color: #57606f;
         }
         footer {
             text-align: center;
@@ -134,18 +165,30 @@
         </div>
 
         <div class="center">
-            <a href="https://drive.google.com/file/d/1s0ru3f2LiZPp2wUkir3UbAWHOUG4i0d2/view?usp=drive_link" target="_blank" class="btn-download">
-                🚀 Baixar ISO do Tflinux (Google Drive)
-            </a>
-            <p style="margin-top: 15px; font-size: 0.9em; color: #a0aec0;">Versão estável pronta para instalação</p>
+            <div class="btn-group">
+                <a href="https://sourceforge.net/projects/tflinux/" target="_blank" class="btn-download btn-sf">
+                    🛸 Baixar do SourceForge (Servidor Principal)
+                </a>
+                <a href="https://drive.google.com/file/d/1s0ru3f2LiZPp2wUkir3UbAWHOUG4i0d2/view?usp=drive_link" target="_blank" class="btn-download">
+                    🚀 Baixar do Google Drive (Mirror)
+                </a>
+            </div>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #a0aec0;">Tamanho do arquivo: ~3.6 GB | Versão estável pronta para instalação</p>
 
-            <!-- AVISO DO MODO LIVE ADICIONADO AQUI -->
             <div class="live-alert">
                 <strong>💡 Dica para o Modo Live:</strong> Se ao iniciar a ISO em modo de teste (Live) o sistema solicitar credenciais na tela de login, basta preencher da seguinte forma para entrar:
                 <ul style="margin: 5px 0 0 0; padding-left: 20px;">
                     <li><strong>Usuário:</strong> <code style="background:#fff; padding:2px 6px; border-radius:3px;">live</code></li>
-                    <li><strong>Senha:</strong> <code style="background:#fff; padding:2px 6px; border-radius:3px;">live. Obs: se já estiver preenchida é só dar enter</code></li>
+                    <li><strong>Senha:</strong> <code style="background:#fff; padding:2px 6px; border-radius:3px;">live. Obs. se se a senha live já estiver prenchida é só dar enter</code></li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Integridade do Arquivo (SHA-256)</h2>
+            <p>Após baixar a ISO, você pode validar a integridade da imagem utilizando o terminal do seu sistema Linux com o comando <code style="background:#f1f2f6; padding:2px 6px; border-radius:3px;">sha256sum Tflinuxplasma5.iso</code> para garantir que o download foi efetuado perfeitamente:</p>
+            <div class="checksum-box">
+                # Caso queira exibir o hash do seu arquivo, substitua este texto pelo resultado gerado no terminal.
             </div>
         </div>
 

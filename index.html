@@ -5,133 +5,213 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tflinux - Sistema Operacional Completo e Amigável</title>
     <style>
+        :root {
+            --primary: #0c2461;
+            --primary-light: #1e3799;
+            --success: #16a34a;
+            --success-hover: #15803d;
+            --warning: #f59e0b;
+            --text-main: #2d3748;
+            --text-muted: #718096;
+            --bg-main: #f7fafc;
+            --bg-card: #ffffff;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
-            color: #2f3640;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
         }
+
         header {
-            background: linear-gradient(135deg, #1e3799, #0c2461);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
             color: white;
             text-align: center;
-            padding: 80px 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
         }
+
+        /* Detalhe sutil com as cores do Brasil */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(to right, #009c3b 33%, #ffdf00 33%, #ffdf00 66%, #002776 66%);
+        }
+
         header h1 {
             margin: 0;
-            font-size: 3.5em;
-            letter-spacing: 1px;
-            font-weight: 700;
+            font-size: 4em;
+            letter-spacing: -1px;
+            font-weight: 800;
         }
+
         header p {
-            font-size: 1.3em;
-            opacity: 0.9;
-            margin-top: 10px;
+            font-size: 1.4em;
+            opacity: 0.95;
+            margin-top: 15px;
             font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
+
         .container {
-            max-width: 900px;
-            margin: 40px auto;
+            max-width: 1000px;
+            margin: -40px auto 40px auto;
             padding: 0 20px;
-            line-height: 1.7;
+            position: relative;
+            z-index: 10;
         }
+
         .card {
-            background: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
             margin-bottom: 30px;
+            border: 1px solid rgba(0,0,0,0.01);
+            transition: transform 0.2s;
         }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
         h2 {
-            color: #0c2461;
+            color: var(--primary);
             border-bottom: 2px solid #edf2f7;
-            padding-bottom: 12px;
+            padding-bottom: 15px;
             margin-top: 0;
-            font-size: 1.8em;
+            font-size: 2em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+
         p {
-            font-size: 1.1em;
+            font-size: 1.15em;
             color: #4a5568;
+            line-height: 1.8;
         }
+
         ul {
             padding-left: 20px;
         }
+
         li {
-            font-size: 1.1em;
-            margin-bottom: 10px;
+            font-size: 1.15em;
+            margin-bottom: 12px;
             color: #4a5568;
+            line-height: 1.6;
         }
+
+        .highlight {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
         .center {
             text-align: center;
-            margin: 50px 0;
+            margin: 60px 0;
         }
+
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
-        @media (min-width: 600px) {
+
+        @media (min-width: 640px) {
             .btn-group {
                 flex-direction: row;
             }
         }
+
         .btn-download {
             display: inline-block;
-            background: linear-gradient(135deg, #23c45e, #16a34a);
+            background: linear-gradient(135deg, #22c55e, var(--success));
             color: white;
             text-decoration: none;
-            padding: 16px 35px;
-            font-size: 1.2em;
-            font-weight: bold;
+            padding: 18px 40px;
+            font-size: 1.25em;
+            font-weight: 700;
             border-radius: 50px;
-            box-shadow: 0 10px 20px rgba(22, 163, 74, 0.2);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 20px rgba(22, 163, 74, 0.15);
+            transition: all 0.2s ease;
         }
+
         .btn-download:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(22, 163, 74, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(22, 163, 74, 0.25);
         }
+
         .btn-sf {
-            background: linear-gradient(135deg, #e67e22, #d35400);
-            box-shadow: 0 10px 20px rgba(211, 84, 0, 0.2);
+            background: linear-gradient(135deg, #f97316, #ea580c);
+            box-shadow: 0 10px 20px rgba(234, 88, 12, 0.15);
         }
+
         .btn-sf:hover {
-            box-shadow: 0 12px 24px rgba(211, 84, 0, 0.3);
+            box-shadow: 0 15px 25px rgba(234, 88, 12, 0.25);
         }
+
         .live-alert {
-            background-color: #fff9db;
-            border-left: 5px solid #fab005;
-            color: #664d03;
-            padding: 15px;
-            border-radius: 4px;
-            max-width: 600px;
-            margin: 25px auto 0 auto;
+            background-color: #fef9c3;
+            border-left: 6px solid var(--warning);
+            color: #713f12;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 700px;
+            margin: 35px auto 0 auto;
             text-align: left;
-            font-size: 1em;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
+
         .checksum-box {
-            background-color: #f1f2f6;
-            border: 1px dashed #ced6e0;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: monospace;
-            font-size: 0.9em;
+            background-color: #f8fafc;
+            border: 2px dashed #cbd5e1;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1em;
             word-break: break-all;
-            margin-top: 10px;
-            color: #57606f;
+            margin-top: 15px;
+            color: #475569;
+            font-weight: 600;
         }
+
+        .badge-br {
+            background-color: #e2fced;
+            color: #15803d;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.6em;
+            vertical-align: middle;
+            display: inline-block;
+            margin-left: 10px;
+            font-weight: 700;
+            border: 1px solid #bbf7d0;
+        }
+
         footer {
             text-align: center;
-            padding: 40px;
-            font-size: 1em;
-            color: #718093;
+            padding: 50px 20px;
+            font-size: 1.05em;
+            color: var(--text-muted);
             border-top: 1px solid #e2e8f0;
-            margin-top: 60px;
+            margin-top: 80px;
+            background-color: #ffffff;
         }
     </style>
 </head>
@@ -139,29 +219,43 @@
 
     <header>
         <h1>Tflinux</h1>
-        <p>Um sistema operacional feito para facilitar o seu dia a dia</p>
+        <p>A força e a estabilidade do Debian unidas em um sistema brasileiro, completo e pronto para o seu dia a dia.</p>
     </header>
 
     <div class="container">
         
         <div class="card">
-            <h2>Sobre o Tflinux</h2>
-            <p>O <strong>Tflinux</strong> nasceu com a missão de ser um sistema operacional amigável, rápido e totalmente pronto para o uso cotidiano. Desenvolvido sobre a rocha da estabilidade do <strong>Debian 12 (Bookworm)</strong> e aliado à elegância visual e fluidez do ambiente gráfico <strong>KDE Plasma</strong>, ele oferece uma experiência familiar e extremamente produtiva.</p>
+            <h2>🇧🇷 Orgulhosamente Nacional e Sob Medida</h2>
+            <p>Mudar de sistema operacional não precisa ser um desafio. O <strong>Tflinux</strong> é uma distribuição brasileira desenvolvida pensando nas necessidades reais do nosso público. Seja para o usuário iniciante ou para quem precisa de foco no trabalho e nos estudos, ele elimina barreiras técnicas e entrega um ambiente familiar, acolhedor e traduzido para a nossa realidade.</p>
         </div>
 
         <div class="card">
-            <h2>Pronto para Trabalhar e Estudar</h2>
-            <p>Esqueça configurações complicadas pós-instalação. O Tflinux já vem preparado com recursos essenciais que a maioria das pessoas precisa no trabalho ou em casa:</p>
+            <h2>Estabilidade Suprema do Debian 12 + KDE Plasma</h2>
+            <p>Construído sobre a rocha da estabilidade do <span class="highlight">Debian 12 (Bookworm)</span>, o Tflinux oferece segurança máxima contra vírus e travamentos. Tudo isso rodando sob a interface <span class="highlight">KDE Plasma</span>: um visual moderno, limpo, fluido e extremamente intuitivo, que faz qualquer pessoa se sentir em casa desde o primeiro clique.</p>
+        </div>
+
+        <div class="card">
+            <h2>✍️ Escritório Completo: LibreOffice 100% em Português</h2>
+            <p>Precisa criar documentos, planilhas ou apresentações? O Tflinux já vem equipado com a suíte de escritório <strong>LibreOffice totalmente em português do Brasil</strong>. </p>
             <ul>
-                <li><strong>Suporte Avançado a Impressoras:</strong> Compatibilidade nativa e simplificada para impressoras modernas, incluindo a linha <strong>Epson EcoTank</strong> e multifuncionais <strong>HP</strong>. Conecte e comece a rodar seus trabalhos sem dores de cabeça com drivers.</li>
-                <li><strong>Base Ultra Estável:</strong> Sendo baseado no Debian, você tem a garantia de um sistema seguro que não quebra e consome pouca memória.</li>
-                <li><strong>Ambiente Moderno:</strong> O ecossistema KDE Plasma entrega um visual limpo, menus organizados e respostas rápidas aos seus cliques.</li>
+                <li><strong>Pronto para uso:</strong> Nada de instalar pacotes de idioma separados após a formatação.</li>
+                <li><strong>Corretor Ortográfico Integrado:</strong> Escreva textos acadêmicos, relatórios ou materiais de trabalho com total tranquilidade utilizando o corretor nativo atualizado segundo as normas da nossa língua.</li>
+                <li><strong>Alta Compatibilidade:</strong> Abra e salve arquivos do Word, Excel e PowerPoint (.docx, .xlsx, .pptx) sem complicação.</li>
             </ul>
         </div>
 
         <div class="card">
-            <h2>Recursos Exclusivos: TicoRadioFinder</h2>
-            <p>Gosta de ouvir música enquanto navega ou trabalha? O Tflinux traz embutido de fábrica o <strong>TicoRadioFinder</strong>, um cliente leve e moderno de rádios online para você sintonizar suas estações favoritas de streaming diretamente do desktop, com facilidade e sem anúncios pesados do navegador.</p>
+            <h2>🖨️ Conecte e Use: Sem Dor de Cabeça com Drivers</h2>
+            <p>Esqueça aquelas configurações complicadas pós-instalação para conseguir trabalhar. O Tflinux foi projetado para ser um sistema pronto:</p>
+            <ul>
+                <li><strong>Suporte Avançado a Impressoras:</strong> Compatibilidade nativa e simplificada para impressoras modernas, incluindo a linha <strong>Epson EcoTank</strong> e multifuncionais <strong>HP</strong>. Conecte o cabo ou configure o Wi-Fi e comece a imprimir na hora!</li>
+                <li><strong>Central de Aplicativos Simplificada:</strong> Baixe navegadores, ferramentas de estudo e jogos com apenas um clique, de forma segura e sem riscos de segurança.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>📻 Recurso Exclusivo: TicoRadioFinder</h2>
+            <p>Gosta de ouvir música ou notícias enquanto estuda e navega? O Tflinux traz embutido de fábrica o <strong>TicoRadioFinder</strong>, um cliente leve e moderno de rádios online para você sintonizar suas estações favoritas diretamente do desktop, gastando o mínimo de memória e sem os anúncios pesados dos navegadores comuns.</p>
         </div>
 
         <div class="center">
@@ -173,29 +267,31 @@
                     🚀 Baixar do Google Drive (Mirror)
                 </a>
             </div>
-            <p style="margin-top: 15px; font-size: 0.9em; color: #a0aec0;">Tamanho do arquivo: ~3.6 GB | Versão estável pronta para instalação</p>
+            <p style="margin-top: 15px; font-size: 0.95em; color: var(--text-muted);">Tamanho do arquivo: ~3.7 GB | Imagem ISO estável e pronta para instalação</p>
 
             <div class="live-alert">
-                <strong>💡 Dica para o Modo Live:</strong> Se ao iniciar a ISO em modo de teste (Live) o sistema solicitar credenciais na tela de login, basta preencher da seguinte forma para entrar:
-                <ul style="margin: 5px 0 0 0; padding-left: 20px;">
-                    <li><strong>Usuário:</strong> <code style="background:#fff; padding:2px 6px; border-radius:3px;">live</code></li>
-                    <li><strong>Senha:</strong> <code style="background:#fff; padding:2px 6px; border-radius:3px;">live. Obs. se a senha live já estiver preenchida é só dar enter</code></li>
+                <strong style="font-size: 1.1em; display: block; margin-bottom: 5px;">💡 Dica para o Modo Live (Teste Sem Instalar):</strong> 
+                Você pode testar o Tflinux direto pelo pen drive sem alterar nada no seu computador! Se a tela de login solicitar credenciais, preencha dessa forma para entrar no sistema:
+                <ul style="margin: 10px 0 0 0; padding-left: 20px;">
+                    <li><strong>Usuário:</strong> <code style="background:#fff; padding:3px 8px; border-radius:4px; font-weight: bold;">live</code></li>
+                    <li><strong>Senha:</strong> <code style="background:#fff; padding:3px 8px; border-radius:4px; font-weight: bold;">live</code> <span style="font-size: 0.9em; color: #5b21b6;">(Obs: se a senha "live" já estiver preenchida automaticamente, basta pressionar Enter).</span></li>
                 </ul>
             </div>
         </div>
 
         <div class="card">
-            <h2>Integridade do Arquivo (SHA-256)</h2>
-            <p>Após baixar a ISO, você pode validar a integridade da imagem utilizando o terminal do seu sistema Linux com o comando <code style="background:#f1f2f6; padding:2px 6px; border-radius:3px;">sha256sum Tflinuxplasma5.iso</code> para garantir que o download foi efetuado perfeitamente:</p>
+            <h2>🔒 Integridade do Arquivo (SHA-256)</h2>
+            <p>Após baixar a ISO, você pode validar se o arquivo veio completo e sem corrompimentos utilizando o terminal do seu sistema Linux atual com o comando abaixo:</p>
+            <code style="background:#e2e8f0; padding:6px 12px; border-radius:6px; font-family: monospace; display: inline-block; font-size: 1em; color: var(--primary);">sha256sum tflinux-live-2026.iso.Base.Debian12_amd64_2026-06-20.iso</code>
             <div class="checksum-box">
-                # Caso queira exibir o hash do seu arquivo, substitua este texto pelo resultado gerado no terminal.
+                # Cole aqui o código hash gerado pelo seu terminal para que os usuários possam comparar.
             </div>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Tflinux Project. Construído com paixão sobre a robustez do Debian.</p>
+        <p>&copy; 2026 Tflinux Project. Desenvolvido com paixão para a comunidade brasileira sobre a robustez inabalável do Debian.</p>
     </footer>
 
 </body>
